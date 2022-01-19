@@ -1,3 +1,5 @@
+// var images = document.getElementsByTagName('img');  
+
 function configureListeners() {
     var images = document.getElementsByTagName('img');    
 
@@ -8,30 +10,40 @@ function configureListeners() {
 }
 
 function addOpacity(event) {
+    //event is an event object automatically passed to all event handlers
+    //You can use event.target.id. event.target represents DOM object and you can access all its property and methods.
     if (!this.classList.contains('dim')){
+        //if the current img in the array "this" refers to the current image doesn't contain class = "dim" this function
+        //will add the class dim to it. class dim styling is set in the css file
         this.classList.add('dim')
     }    
-    getProductInfo(event.target.id);     
+    getProductInfo(event.target.id);  
+    //calls the getProductInfo function which is a switch case that is all the part numbers   
 }
 
 function removeOpacity(event) {
      if (this.classList.contains('dim')){
+         //remove opacity is the function called on mouseout and will remove the dim class and the dim styling defined in the css file
         this.classList.remove('dim');
     }
 
     let element = document.getElementById('ppg');
         element.textContent = '';
-        
+        //this clears the pgg price per gallon text in the floatright text content on hover over without it the previous
+        //color and price remains on screen until you mouse over another color
     let color = document.getElementById('color');
         color.textContent = ''; 
+        //this clears the color text in the floatright text content on hover over
 
     event.preventDefault();    
+    //The preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur.
 }
 
 function changeImage(elementId) {
     let image = document.getElementById('imgDisplay');
     image.src = elementId.src;
 }
+// why do we need the changeimage function? the code runs exactly the same without it
 
 function getProductInfo(partNumber) {
     let price;
